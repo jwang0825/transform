@@ -23,7 +23,7 @@ def get_perspective():
 	return cv2.getPerspectiveTransform(pts1, pts2)
 
 if __name__ == "__main__":
-	image = cv2.imread('test-l3.jpeg', cv2.IMREAD_COLOR)
+	image = cv2.imread('/Users/jwang/Downloads/test-l3.jpeg', cv2.IMREAD_COLOR)
 
 	height = image.shape[0]
 	width = image.shape[1]
@@ -43,5 +43,5 @@ if __name__ == "__main__":
 	inverse_matrix = np.linalg.inv(matrix)
 	result = cv2.warpPerspective(trans, inverse_matrix, (width, height))
 	cv2.imshow("result", result) 
-	cv2.imwrite("updated_image.jpeg",result)
+	cv2.imwrite("/Users/jwang/Downloads/updated_image.jpeg",result)
 	cv2.waitKey(0)
