@@ -22,9 +22,13 @@ def get_perspective():
 
 	return cv2.getPerspectiveTransform(pts1, pts2)
 
-def modify_image(image):
+if __name__ == "__main__":
+	image = cv2.imread('test-l3.jpeg', cv2.IMREAD_COLOR)
+
 	height = image.shape[0]
 	width = image.shape[1]
+
+	cv2.imshow("original", image) 
 
 	matrix = get_perspective()
 
@@ -37,14 +41,7 @@ def modify_image(image):
 	# Restore to original image with circle detected
 	# Take the inverse of the matrix used to transform the image
 	inverse_matrix = np.linalg.inv(matrix)
-	return cv2.warpPerspective(trans, inverse_matrix, (width, height))
-
-if __name__ == "__main__":
-	image = cv2.imread('test-l3.jpeg', cv2.IMREAD_COLOR)
-
-	result = modify_image(image)
-	
+	result = cv2.warpPerspective(trans, inverse_matrix, (width, height))
 	cv2.imshow("result", result) 
 	cv2.imwrite("updated_image.jpeg",result)
-
 	cv2.waitKey(0)
